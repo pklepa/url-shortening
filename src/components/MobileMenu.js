@@ -53,6 +53,13 @@ const NavItem = styled.button`
   font-size: 1rem;
   font-family: ${(props) => props.theme.fonts.text};
   text-align: center;
+
+  transition: color 0.4s;
+
+  &:hover {
+    color: ${(props) => props.theme.colors.grey_violet};
+    cursor: pointer;
+  }
 `;
 
 const Separator = styled.div`
