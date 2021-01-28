@@ -4,8 +4,9 @@ import GlobalStyle from "./assets/styles/globalStyles";
 import theme from "./assets/styles/theme";
 
 import Layout from "./components/Layout";
-import MobileMenu from "./components/MobileMenu";
 import Navbar from "./components/Navbar";
+import MobileMenu from "./components/MobileMenu";
+import HeroSection from "./components/HeroSection";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -17,6 +18,8 @@ function App() {
       <Layout>
         <Navbar showMenu={showMenu} setShowMenu={setShowMenu} />
         <MobileMenu showMenu={showMenu} />
+
+        <HeroSection />
       </Layout>
     </ThemeProvider>
   );

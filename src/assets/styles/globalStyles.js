@@ -21,6 +21,8 @@ const GlobalStyle = createGlobalStyle`
 
   * {
     box-sizing: border-box;
+    font-family: ${(props) => props.theme.fonts.text}; 
+
   }
   
 `;
