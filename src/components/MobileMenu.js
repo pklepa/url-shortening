@@ -29,7 +29,7 @@ const Container = styled.div`
   background-color: ${(props) => props.theme.colors.violet};
   width: ${(props) =>
     props.visible ? "min(calc(100% - 2rem), 400px)" : "50px"};
-  height: ${(props) => (props.visible ? "auto" : "50px")};
+  height: ${(props) => (props.visible ? "310px" : "50px")};
   border-radius: ${(props) => (props.visible ? "10px" : "50%")};
 
   opacity: ${(props) => (props.visible ? "1" : "0")};
