@@ -32,8 +32,8 @@ const Container = styled.header`
   align-items: flex-start;
   justify-content: space-between;
 
-  width: 100%;
-  padding: 2.5rem 1.5rem;
+  width: min(100%, 1440px);
+  padding: 2.5rem 2rem;
 
   @media ${(props) => props.theme.devices.tablet} {
     align-items: center;

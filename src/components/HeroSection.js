@@ -30,10 +30,18 @@ function HeroSection() {
 const Container = styled.section`
   display: flex;
   flex-direction: column-reverse;
-  /* align-items: center; */
 
-  width: 100%;
+  width: min(100%, 1440px);
   padding: 0 1rem;
+
+  @media ${(props) => props.theme.devices.tablet} {
+    /* display: grid; */
+    /* grid-template-columns: 600px 1fr; */
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 4rem 2rem;
+    align-items: center;
+  }
 `;
 
 const Content = styled.div`
@@ -56,6 +64,23 @@ const Content = styled.div`
 
     margin: 1rem 0;
   }
+
+  @media ${(props) => props.theme.devices.tablet} {
+    align-items: flex-start;
+    margin-right: 1rem;
+
+    h1 {
+      font-size: 4rem;
+      text-align: left;
+      width: 600px;
+    }
+
+    span {
+      text-align: left;
+      width: 600px;
+      margin-bottom: 2rem;
+    }
+  }
 `;
 
 const Illustration = styled.img`
@@ -63,6 +88,10 @@ const Illustration = styled.img`
   margin-bottom: 1rem;
 
   align-self: ${(props) => (props.width > 600 ? "center" : "flex-start")};
+
+  @media ${(props) => props.theme.devices.tablet} {
+    width: 700px;
+  }
 `;
 
 export default HeroSection;
