@@ -39,6 +39,8 @@ const Icon = styled.a`
   flex-direction: column;
   margin: 0;
 
+  z-index: 100;
+
   .line {
     background: ${(props) => props.theme.colors.grey_violet};
     width: ${(props) => props.myConfig.widthLine};

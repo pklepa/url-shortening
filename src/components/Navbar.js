@@ -4,18 +4,18 @@ import HamburguerIcon from "./HamburguerIcon";
 
 import Img from "../assets/images/logo.svg";
 
-function Navbar() {
+function Navbar({ showMenu, setShowMenu }) {
   return (
     <Container>
       <Logo src={Img} alt="Shortly logo" />
-      <HamburguerIcon showMenu={false} />
+      <HamburguerIcon showMenu={showMenu} setShowMenu={setShowMenu} />
     </Container>
   );
 }
 
 const Container = styled.header`
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   justify-content: space-between;
 
   width: 100%;
