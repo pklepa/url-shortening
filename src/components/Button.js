@@ -1,11 +1,6 @@
-import React from "react";
 import styled from "styled-components";
 
-function Button({ children }) {
-  return <StyledButton>{children}</StyledButton>;
-}
-
-const StyledButton = styled.button`
+const Button = styled.button`
   color: ${(props) => props.theme.colors.white};
   font-weight: 700;
   font-size: 1rem;
@@ -15,6 +10,13 @@ const StyledButton = styled.button`
   border: none;
   outline: none;
   border-radius: 2rem;
+
+  transition: filter 0.4s;
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(1.1);
+  }
 `;
 
 export default Button;

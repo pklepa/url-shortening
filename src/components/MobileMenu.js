@@ -1,6 +1,8 @@
 import React from "react";
 import styled from "styled-components";
 
+import Button from "./Button";
+
 function MobileMenu({ showMenu }) {
   return (
     <Container visible={showMenu}>
@@ -11,7 +13,7 @@ function MobileMenu({ showMenu }) {
       <Separator />
 
       <NavItem>Login</NavItem>
-      <NavItem>Sign Up</NavItem>
+      <LoginButton>Sign Up</LoginButton>
     </Container>
   );
 }
@@ -29,7 +31,7 @@ const Container = styled.div`
   background-color: ${(props) => props.theme.colors.violet};
   width: ${(props) =>
     props.visible ? "min(calc(100% - 2rem), 400px)" : "50px"};
-  height: ${(props) => (props.visible ? "310px" : "50px")};
+  height: ${(props) => (props.visible ? "326px" : "50px")};
   border-radius: ${(props) => (props.visible ? "10px" : "50%")};
 
   opacity: ${(props) => (props.visible ? "1" : "0")};
@@ -59,6 +61,11 @@ const Separator = styled.div`
   background-color: ${(props) => props.theme.colors.grey};
   opacity: 0.2;
   margin-bottom: 1rem;
+`;
+
+const LoginButton = styled(Button)`
+  padding: 0.5rem 2rem;
+  width: 100%;
 `;
 
 export default MobileMenu;
