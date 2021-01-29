@@ -37,6 +37,7 @@ const Container = styled.div`
   flex-direction: column;
   padding: 1rem;
   width: 100%;
+  margin-top: 1rem;
 
   background-color: ${(props) => props.theme.colors.white};
   border-radius: 0.5rem;
