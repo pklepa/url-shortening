@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import styled from "styled-components";
+import axios from "axios";
 import useWindowDimensions from "../assets/utils/useWindowDimensions";
 
 import Img from "../assets/images/bg-shorten-mobile.svg";
@@ -15,17 +16,36 @@ function SearchSection() {
   const [userInput, setUserInput] = useState("");
   const [hideTips, setHideTips] = useState(true);
 
+  const [shortLinks, setShortLinks] = useState([]);
+
   function handleChange(e) {
     setUserInput(e.target.value);
   }
 
   function handleSubmit(e) {
+    e.preventDefault();
+
     // Only shows tips after the user first changes the input
     if (!userInput && hideTips) setHideTips(false);
 
-    alert("oh, hi mark");
-
-    setUserInput("");
+    axios
+      .get(
+        "https://api.shrtco.de/v2/shorten?url=example.org/very/long/link.html",
+        { responseType: "json" }
+      )
+      .then((res) => {
+        console.log(res);
+        setShortLinks([
+          ...shortLinks,
+          { original: userInput, short: res.data.result.full_short_link },
+        ]);
+      })
+      .then(() => {
+        setUserInput("");
+      })
+      .catch((err) => {
+        console.log(err);
+      });
   }
 
   return (
@@ -49,8 +69,9 @@ function SearchSection() {
       </Form>
 
       <ResultsContainer>
-        <SearchResult />
-        <SearchResult />
+        {shortLinks.map((item) => {
+          return <SearchResult original={item.original} short={item.short} />;
+        })}
       </ResultsContainer>
     </Container>
   );
