@@ -10,6 +10,10 @@ function SearchResult() {
   function handleClick() {
     navigator.clipboard.writeText(linkRef.current.textContent);
     setIsCopied(true);
+
+    setTimeout(() => {
+      setIsCopied(false);
+    }, 5000);
   }
 
   return (
@@ -35,24 +39,44 @@ const Container = styled.div`
   width: 100%;
 
   background-color: ${(props) => props.theme.colors.white};
-  border-radius: 1rem;
+  border-radius: 0.5rem;
 
   div {
     display: flex;
     flex-direction: column;
   }
+
+  @media ${(props) => props.theme.devices.tablet} {
+    flex-direction: row;
+    justify-content: space-between;
+    padding: 1rem 3rem;
+
+    div {
+      flex-direction: row;
+      align-items: center;
+    }
+  }
 `;
 
 const InitialLink = styled.span`
+  font-weight: 500;
   padding-bottom: 1rem;
   border-bottom: 1px solid #d3d3d3;
-  font-weight: 500;
+
+  @media ${(props) => props.theme.devices.tablet} {
+    border: none;
+    padding: 0;
+  }
 `;
 
 const ShortLink = styled.span`
   color: ${(props) => props.theme.colors.cyan};
   padding: 1rem 0;
   font-weight: 500;
+
+  @media ${(props) => props.theme.devices.tablet} {
+    padding: 0 1rem;
+  }
 `;
 
 const CopyButton = styled(Button)`
