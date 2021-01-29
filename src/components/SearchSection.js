@@ -9,6 +9,7 @@ import ImgDesktop from "../assets/images/bg-shorten-desktop.svg";
 
 import Button from "./Button";
 import SearchResult from "./SearchResult";
+import SearchLoading from "./SearchLoading";
 
 function SearchSection() {
   const { width } = useWindowDimensions();
@@ -20,6 +21,7 @@ function SearchSection() {
 
   function handleChange(e) {
     setUserInput(e.target.value);
+    setHideTips(true);
   }
 
   function handleSubmit(e) {
@@ -91,6 +93,8 @@ function SearchSection() {
             />
           );
         })}
+
+        {isLoading && <SearchLoading />}
       </ResultsContainer>
     </Container>
   );
