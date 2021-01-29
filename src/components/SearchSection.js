@@ -15,8 +15,8 @@ function SearchSection() {
 
   const [userInput, setUserInput] = useState("");
   const [hideTips, setHideTips] = useState(true);
-
   const [shortLinks, setShortLinks] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleChange(e) {
     setUserInput(e.target.value);
@@ -26,7 +26,12 @@ function SearchSection() {
     e.preventDefault();
 
     // Only shows tips after the user first changes the input
-    if (!userInput && hideTips) setHideTips(false);
+    if (!userInput && hideTips) {
+      setHideTips(false);
+      return;
+    }
+
+    setIsLoading(true);
 
     axios
       .get(
@@ -34,7 +39,6 @@ function SearchSection() {
         { responseType: "json" }
       )
       .then((res) => {
-        console.log(res);
         setShortLinks([
           ...shortLinks,
           { original: userInput, short: res.data.result.full_short_link },
@@ -42,6 +46,7 @@ function SearchSection() {
       })
       .then(() => {
         setUserInput("");
+        setIsLoading(false);
       })
       .catch((err) => {
         console.log(err);
@@ -65,12 +70,20 @@ function SearchSection() {
         />
         <UserTip hideTips={hideTips}>Please add a link</UserTip>
 
-        <SearchButton onClick={handleSubmit}>Shorten it!</SearchButton>
+        <SearchButton onClick={handleSubmit} isLoading={isLoading}>
+          Shorten it!
+        </SearchButton>
       </Form>
 
       <ResultsContainer>
-        {shortLinks.map((item) => {
-          return <SearchResult original={item.original} short={item.short} />;
+        {shortLinks.map((item, index) => {
+          return (
+            <SearchResult
+              key={index}
+              original={item.original}
+              short={item.short}
+            />
+          );
         })}
       </ResultsContainer>
     </Container>
@@ -155,6 +168,10 @@ const UserTip = styled.span`
 const SearchButton = styled(Button)`
   width: 100%;
   border-radius: 0.5rem;
+
+  background-color: ${(props) =>
+    props.isLoading ? props.theme.colors.grey_violet : props.theme.colors.cyan};
+  cursor: ${(props) => (props.isLoading ? "progress" : "pointer")};
 
   @media ${(props) => props.theme.devices.tablet} {
     width: auto;
