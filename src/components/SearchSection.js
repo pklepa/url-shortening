@@ -1,12 +1,17 @@
 import React, { useState } from "react";
 
 import styled from "styled-components";
-import Button from "./Button";
+import useWindowDimensions from "../assets/utils/useWindowDimensions";
 
 import Img from "../assets/images/bg-shorten-mobile.svg";
+import ImgDesktop from "../assets/images/bg-shorten-desktop.svg";
+
+import Button from "./Button";
 import SearchResult from "./SearchResult";
 
 function SearchSection() {
+  const { width } = useWindowDimensions();
+
   const [userInput, setUserInput] = useState("");
   const [hideTips, setHideTips] = useState(true);
 
@@ -25,7 +30,11 @@ function SearchSection() {
 
   return (
     <Container>
-      <Form style={{ backgroundImage: `url(${Img})` }}>
+      <Form
+        style={{
+          backgroundImage: width < 850 ? `url(${Img})` : `url(${ImgDesktop})`,
+        }}
+      >
         <UserInput
           value={userInput}
           onChange={handleChange}
@@ -57,13 +66,13 @@ const Container = styled.section`
 const Form = styled.form`
   display: flex;
   flex-direction: column;
-  padding: 1.5rem;
   background-color: ${(props) => props.theme.colors.violet};
   background-position: top right;
   background-repeat: no-repeat;
 
   border-radius: 0.8rem;
   width: 100%;
+  padding: 1.5rem;
 
   margin-top: -100px;
 
@@ -71,6 +80,18 @@ const Form = styled.form`
 
   & > *:not(:first-child) {
     margin-top: 1rem;
+  }
+
+  @media ${(props) => props.theme.devices.tablet} {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 2rem 3rem;
+    margin-top: -68px;
+
+    background-position: top right;
+    background-size: cover;
   }
 `;
 
@@ -84,13 +105,12 @@ const UserInput = styled.input`
   font-size: 1rem;
   color: ${(props) => props.theme.colors.dark_violet};
 
-  width: 100%;
+  flex: 1;
   transition: all 0.4s;
 
   &:invalid {
     border: ${(props) => (props.hideTips ? "none" : "4px solid #F46262")};
     padding: ${(props) => (props.hideTips ? "1rem" : "calc(1rem - 4px)")};
-    /* margin-bottom: ${(props) => (props.hideTips ? "1rem" : "0.5rem")}; */
 
     &::placeholder {
       color: ${(props) => (props.hideTips ? "none" : "#F46262")};
@@ -113,6 +133,11 @@ const UserTip = styled.span`
 const SearchButton = styled(Button)`
   width: 100%;
   border-radius: 0.5rem;
+
+  @media ${(props) => props.theme.devices.tablet} {
+    width: auto;
+    margin: 0 0 0 1rem !important;
+  }
 `;
 
 const ResultsContainer = styled.div`

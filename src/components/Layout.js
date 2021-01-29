@@ -24,7 +24,11 @@ export const ColorBackground = styled.div`
 
   background-color: ${(props) => props.theme.colors.grey_light};
 
-  margin-top: 13rem;
+  margin-top: 10rem;
+
+  @media ${(props) => props.theme.devices.tablet} {
+    margin-top: 4rem;
+  }
 `;
 
 export default Layout;
