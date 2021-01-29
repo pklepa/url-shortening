@@ -8,6 +8,7 @@ import Navbar from "./components/Navbar";
 import MobileMenu from "./components/MobileMenu";
 import HeroSection from "./components/HeroSection";
 import SearchSection from "./components/SearchSection";
+import DetailsSection from "./components/DetailsSection";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -24,6 +25,8 @@ function App() {
 
         <ColorBackground>
           <SearchSection />
+
+          <DetailsSection />
         </ColorBackground>
       </Layout>
     </ThemeProvider>
