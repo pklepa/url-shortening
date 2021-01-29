@@ -1,13 +1,21 @@
 import React from "react";
-import Button from "./Button";
+import styled from "styled-components";
+import useWindowDimensions from "../assets/utils/useWindowDimensions";
 
 import Img from "../assets/images/bg-boost-mobile.svg";
 import ImgDesktop from "../assets/images/bg-boost-desktop.svg";
-import styled from "styled-components";
+
+import Button from "./Button";
 
 function CallToActionSection() {
+  const { width } = useWindowDimensions();
+
   return (
-    <Container style={{ backgroundImage: `url(${Img})` }}>
+    <Container
+      style={{
+        backgroundImage: width < 850 ? `url(${Img})` : `url(${ImgDesktop})`,
+      }}
+    >
       <h1>Boost your links today</h1>
       <Button>Get Started</Button>
     </Container>
@@ -36,6 +44,13 @@ const Container = styled.section`
     text-align: center;
 
     margin-bottom: 1rem;
+  }
+
+  @media ${(props) => props.theme.devices.tablet} {
+    h1 {
+      font-size: 2rem;
+      margin-bottom: 1.5rem;
+    }
   }
 `;
 
