@@ -36,10 +36,9 @@ function SearchSection() {
     setIsLoading(true);
 
     axios
-      .get(
-        "https://api.shrtco.de/v2/shorten?url=example.org/very/long/link.html",
-        { responseType: "json" }
-      )
+      .get(`https://api.shrtco.de/v2/shorten?url=${userInput}`, {
+        responseType: "json",
+      })
       .then((res) => {
         setShortLinks([
           ...shortLinks,
