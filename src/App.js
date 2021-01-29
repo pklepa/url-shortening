@@ -7,6 +7,7 @@ import Layout from "./components/Layout";
 import Navbar from "./components/Navbar";
 import MobileMenu from "./components/MobileMenu";
 import HeroSection from "./components/HeroSection";
+import SearchSection from "./components/SearchSection";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -20,6 +21,8 @@ function App() {
         <MobileMenu showMenu={showMenu} />
 
         <HeroSection />
+
+        <SearchSection />
       </Layout>
     </ThemeProvider>
   );
