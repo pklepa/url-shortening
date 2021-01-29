@@ -108,6 +108,7 @@ const Cards = styled.div`
     grid-gap: 2rem;
 
     align-items: flex-start;
+    margin-bottom: 3rem;
   }
 `;
 

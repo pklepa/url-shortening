@@ -57,7 +57,7 @@ const NavItem = styled.button`
   transition: color 0.4s;
 
   &:hover {
-    color: ${(props) => props.theme.colors.grey_violet};
+    color: ${(props) => props.theme.colors.cyan};
     cursor: pointer;
   }
 `;
