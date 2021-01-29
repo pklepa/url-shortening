@@ -1,6 +1,7 @@
 import React, { useState } from "react";
 
 import styled from "styled-components";
+import axios from "axios";
 import useWindowDimensions from "../assets/utils/useWindowDimensions";
 
 import Img from "../assets/images/bg-shorten-mobile.svg";
@@ -8,24 +9,52 @@ import ImgDesktop from "../assets/images/bg-shorten-desktop.svg";
 
 import Button from "./Button";
 import SearchResult from "./SearchResult";
+import SearchLoading from "./SearchLoading";
 
 function SearchSection() {
   const { width } = useWindowDimensions();
 
   const [userInput, setUserInput] = useState("");
   const [hideTips, setHideTips] = useState(true);
+  const [shortLinks, setShortLinks] = useState([]);
+  const [isLoading, setIsLoading] = useState(false);
 
   function handleChange(e) {
     setUserInput(e.target.value);
+    setHideTips(true);
   }
 
   function handleSubmit(e) {
+    e.preventDefault();
+
     // Only shows tips after the user first changes the input
-    if (!userInput && hideTips) setHideTips(false);
+    if (!userInput && hideTips) {
+      setHideTips(false);
+      return;
+    }
 
-    alert("oh, hi mark");
+    setIsLoading(true);
 
-    setUserInput("");
+    axios
+      .get(
+        "https://api.shrtco.de/v2/shorten?url=example.org/very/long/link.html",
+        { responseType: "json" }
+      )
+      .then((res) => {
+        setShortLinks([
+          ...shortLinks,
+          { original: userInput, short: res.data.result.full_short_link },
+        ]);
+      })
+      .then(() => {
+        setUserInput("");
+        setIsLoading(false);
+      })
+      .catch((err) => {
+        console.log(err);
+        alert("There was an error with the API, please try again later.");
+        setIsLoading(false);
+      });
   }
 
   return (
@@ -35,22 +64,39 @@ function SearchSection() {
           backgroundImage: width < 850 ? `url(${Img})` : `url(${ImgDesktop})`,
         }}
       >
-        <UserInput
-          value={userInput}
-          onChange={handleChange}
-          hideTips={hideTips}
-          type="text"
-          required
-          placeholder="Shorten a link here..."
-        />
-        <UserTip hideTips={hideTips}>Please add a link</UserTip>
+        <InputWrapper>
+          <UserInput
+            value={userInput}
+            onChange={handleChange}
+            hideTips={hideTips}
+            type="text"
+            required
+            placeholder="Shorten a link here..."
+          />
+          <UserTip hideTips={hideTips}>Please add a link</UserTip>
+        </InputWrapper>
 
-        <SearchButton onClick={handleSubmit}>Shorten it!</SearchButton>
+        <SearchButton
+          onClick={handleSubmit}
+          isLoading={isLoading}
+          hideTips={hideTips}
+        >
+          Shorten it!
+        </SearchButton>
       </Form>
 
       <ResultsContainer>
-        <SearchResult />
-        <SearchResult />
+        {shortLinks.map((item, index) => {
+          return (
+            <SearchResult
+              key={index}
+              original={item.original}
+              short={item.short}
+            />
+          );
+        })}
+
+        {isLoading && <SearchLoading />}
       </ResultsContainer>
     </Container>
   );
@@ -79,9 +125,9 @@ const Form = styled.form`
 
   position: relative;
 
-  & > *:not(:first-child) {
+  /* & > *:not(:first-child) {
     margin-top: 1rem;
-  }
+  } */
 
   @media ${(props) => props.theme.devices.tablet} {
     flex-direction: row;
@@ -96,6 +142,12 @@ const Form = styled.form`
   }
 `;
 
+const InputWrapper = styled.div`
+  flex: 1;
+
+  /* position: relative; */
+`;
+
 const UserInput = styled.input`
   background-color: ${(props) => props.theme.colors.white};
   border: none;
@@ -106,7 +158,7 @@ const UserInput = styled.input`
   font-size: 1rem;
   color: ${(props) => props.theme.colors.dark_violet};
 
-  flex: 1;
+  width: 100%;
   transition: all 0.4s;
 
   &:invalid {
@@ -135,9 +187,15 @@ const SearchButton = styled(Button)`
   width: 100%;
   border-radius: 0.5rem;
 
+  background-color: ${(props) =>
+    props.isLoading ? props.theme.colors.grey_violet : props.theme.colors.cyan};
+  cursor: ${(props) => (props.isLoading ? "progress" : "pointer")};
+
+  margin-top: 1rem;
+
   @media ${(props) => props.theme.devices.tablet} {
     width: auto;
-    margin: 0 0 0 1rem !important;
+    margin: ${(props) => (props.hideTips ? "0 0 0 1rem" : "0 0 1.85rem 1rem")};
   }
 `;
 

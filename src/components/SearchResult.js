@@ -3,7 +3,7 @@ import styled from "styled-components";
 
 import Button from "./Button";
 
-function SearchResult() {
+function SearchResult({ original, short }) {
   const linkRef = useRef(null);
   const [isCopied, setIsCopied] = useState(false);
 
@@ -19,11 +19,11 @@ function SearchResult() {
   return (
     <Container>
       <div>
-        <InitialLink>https://www.frontendmentor.io</InitialLink>
+        <InitialLink>{original}</InitialLink>
       </div>
 
       <div>
-        <ShortLink ref={linkRef}>https://rel.ink/k4lKyk</ShortLink>
+        <ShortLink ref={linkRef}>{short}</ShortLink>
         <CopyButton isCopied={isCopied} onClick={handleClick}>
           {isCopied ? "Copied!" : "Copy"}
         </CopyButton>
