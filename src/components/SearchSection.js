@@ -52,6 +52,8 @@ function SearchSection() {
       })
       .catch((err) => {
         console.log(err);
+        alert("There was an error with the API, please try again later.");
+        setIsLoading(false);
       });
   }
 
