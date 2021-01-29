@@ -31,7 +31,7 @@ const Container = styled.section`
   display: flex;
   flex-direction: column-reverse;
 
-  width: min(100%, 1440px);
+  width: min(100%, 1240px);
   padding: 0 1rem;
 
   @media ${(props) => props.theme.devices.tablet} {

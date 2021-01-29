@@ -60,7 +60,7 @@ const Container = styled.section`
   flex-direction: column;
   padding: 0 1rem 3rem;
 
-  width: 100%;
+  width: min(100%, 1240px);
 `;
 
 const Form = styled.form`

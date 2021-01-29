@@ -32,7 +32,7 @@ const Container = styled.header`
   align-items: flex-start;
   justify-content: space-between;
 
-  width: min(100%, 1440px);
+  width: min(100%, 1240px);
   padding: 2.5rem 2rem;
 
   @media ${(props) => props.theme.devices.tablet} {
