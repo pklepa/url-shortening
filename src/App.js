@@ -10,6 +10,7 @@ import HeroSection from "./components/HeroSection";
 import SearchSection from "./components/SearchSection";
 import DetailsSection from "./components/DetailsSection";
 import CallToActionSection from "./components/CallToActionSection";
+import Footer from "./components/Footer";
 
 function App() {
   const [showMenu, setShowMenu] = useState(false);
@@ -31,6 +32,8 @@ function App() {
         </ColorBackground>
 
         <CallToActionSection />
+
+        <Footer />
       </Layout>
     </ThemeProvider>
   );

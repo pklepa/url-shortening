@@ -47,6 +47,8 @@ const Container = styled.section`
   }
 
   @media ${(props) => props.theme.devices.tablet} {
+    padding: 3rem 2rem;
+
     h1 {
       font-size: 2rem;
       margin-bottom: 1.5rem;
