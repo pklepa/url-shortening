@@ -17,7 +17,7 @@ function DetailsSection() {
       </Header>
 
       <Cards>
-        <Card>
+        <Card className="first">
           <IconWrapper>
             <img src={icon1} alt="Icon" />
           </IconWrapper>
@@ -28,7 +28,7 @@ function DetailsSection() {
           </span>
         </Card>
 
-        <Card>
+        <Card className="second">
           <IconWrapper>
             <img src={icon2} alt="Icon" />
           </IconWrapper>
@@ -39,7 +39,7 @@ function DetailsSection() {
           </span>
         </Card>
 
-        <Card>
+        <Card className="third">
           <IconWrapper>
             <img src={icon3} alt="Icon" />
           </IconWrapper>
@@ -84,7 +84,14 @@ const Header = styled.header`
     font-weight: 700;
     text-align: center;
 
-    margin-bottom: 2.5rem;
+    margin: 0 auto 2.5rem;
+    max-width: 600px;
+  }
+
+  @media ${(props) => props.theme.devices.tablet} {
+    h1 {
+      font-size: 2.5rem;
+    }
   }
 `;
 
@@ -94,6 +101,14 @@ const Cards = styled.div`
   width: 100%;
 
   position: relative;
+
+  @media ${(props) => props.theme.devices.tablet} {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 2rem;
+
+    align-items: flex-start;
+  }
 `;
 
 const Card = styled.div`
@@ -109,7 +124,7 @@ const Card = styled.div`
   z-index: 10;
 
   h1 {
-    font-size: 1.5rem;
+    font-size: 1.3rem;
     color: ${(props) => props.theme.colors.violet};
     font-weight: 700;
     line-height: 1.2em;
@@ -121,6 +136,23 @@ const Card = styled.div`
   span {
     color: ${(props) => props.theme.colors.grey};
     text-align: center;
+  }
+
+  @media ${(props) => props.theme.devices.tablet} {
+    min-height: 310px;
+
+    h1,
+    span {
+      text-align: left;
+    }
+
+    &.second {
+      margin: 6rem 0 0;
+    }
+
+    &.third {
+      margin: 9rem 0 0;
+    }
   }
 `;
 
@@ -144,6 +176,10 @@ const IconWrapper = styled.div`
   img {
     width: 2.5rem;
   }
+
+  @media ${(props) => props.theme.devices.tablet} {
+    left: 4.5rem;
+  }
 `;
 
 const CyanLine = styled.div`
@@ -156,6 +192,15 @@ const CyanLine = styled.div`
   left: 50%;
 
   transform: translateX(-50%);
+
+  @media ${(props) => props.theme.devices.tablet} {
+    height: 10px;
+    width: 70%;
+
+    top: 50%;
+    left: 15%;
+    transform: translateY(-50%);
+  }
 `;
 
 export default DetailsSection;
