@@ -125,10 +125,6 @@ const Form = styled.form`
 
   position: relative;
 
-  /* & > *:not(:first-child) {
-    margin-top: 1rem;
-  } */
-
   @media ${(props) => props.theme.devices.tablet} {
     flex-direction: row;
     justify-content: space-between;
@@ -144,8 +140,6 @@ const Form = styled.form`
 
 const InputWrapper = styled.div`
   flex: 1;
-
-  /* position: relative; */
 `;
 
 const UserInput = styled.input`
