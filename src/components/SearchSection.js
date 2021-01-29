@@ -60,17 +60,23 @@ function SearchSection() {
           backgroundImage: width < 850 ? `url(${Img})` : `url(${ImgDesktop})`,
         }}
       >
-        <UserInput
-          value={userInput}
-          onChange={handleChange}
-          hideTips={hideTips}
-          type="text"
-          required
-          placeholder="Shorten a link here..."
-        />
-        <UserTip hideTips={hideTips}>Please add a link</UserTip>
+        <InputWrapper>
+          <UserInput
+            value={userInput}
+            onChange={handleChange}
+            hideTips={hideTips}
+            type="text"
+            required
+            placeholder="Shorten a link here..."
+          />
+          <UserTip hideTips={hideTips}>Please add a link</UserTip>
+        </InputWrapper>
 
-        <SearchButton onClick={handleSubmit} isLoading={isLoading}>
+        <SearchButton
+          onClick={handleSubmit}
+          isLoading={isLoading}
+          hideTips={hideTips}
+        >
           Shorten it!
         </SearchButton>
       </Form>
@@ -113,9 +119,9 @@ const Form = styled.form`
 
   position: relative;
 
-  & > *:not(:first-child) {
+  /* & > *:not(:first-child) {
     margin-top: 1rem;
-  }
+  } */
 
   @media ${(props) => props.theme.devices.tablet} {
     flex-direction: row;
@@ -130,6 +136,12 @@ const Form = styled.form`
   }
 `;
 
+const InputWrapper = styled.div`
+  flex: 1;
+
+  /* position: relative; */
+`;
+
 const UserInput = styled.input`
   background-color: ${(props) => props.theme.colors.white};
   border: none;
@@ -140,7 +152,7 @@ const UserInput = styled.input`
   font-size: 1rem;
   color: ${(props) => props.theme.colors.dark_violet};
 
-  flex: 1;
+  width: 100%;
   transition: all 0.4s;
 
   &:invalid {
@@ -173,9 +185,11 @@ const SearchButton = styled(Button)`
     props.isLoading ? props.theme.colors.grey_violet : props.theme.colors.cyan};
   cursor: ${(props) => (props.isLoading ? "progress" : "pointer")};
 
+  margin-top: 1rem;
+
   @media ${(props) => props.theme.devices.tablet} {
     width: auto;
-    margin: 0 0 0 1rem !important;
+    margin: ${(props) => (props.hideTips ? "0 0 0 1rem" : "0 0 1.85rem 1rem")};
   }
 `;
 
