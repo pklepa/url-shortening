@@ -4,6 +4,7 @@ import styled from "styled-components";
 import Button from "./Button";
 
 import Img from "../assets/images/bg-shorten-mobile.svg";
+import SearchResult from "./SearchResult";
 
 function SearchSection() {
   const [userInput, setUserInput] = useState("");
@@ -37,6 +38,10 @@ function SearchSection() {
 
         <SearchButton onClick={handleSubmit}>Shorten it!</SearchButton>
       </Form>
+
+      <ResultsContainer>
+        <SearchResult />
+      </ResultsContainer>
     </Container>
   );
 }
@@ -44,7 +49,7 @@ function SearchSection() {
 const Container = styled.section`
   display: flex;
   flex-direction: column;
-  padding: 3rem 1rem;
+  padding: 0 1rem 3rem;
 
   width: 100%;
 `;
@@ -59,6 +64,8 @@ const Form = styled.form`
 
   border-radius: 0.8rem;
   width: 100%;
+
+  margin-top: -100px;
 
   position: relative;
 
@@ -106,6 +113,14 @@ const UserTip = styled.span`
 const SearchButton = styled(Button)`
   width: 100%;
   border-radius: 0.5rem;
+`;
+
+const ResultsContainer = styled.div`
+  display: flex;
+  flex-direction: column;
+
+  width: 100%;
+  margin-top: 2rem;
 `;
 
 export default SearchSection;

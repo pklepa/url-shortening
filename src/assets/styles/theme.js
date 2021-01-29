@@ -12,6 +12,7 @@ const theme = {
     violet: "hsl(257, 27%, 26%)",
     red: "hsl(0, 87%, 67%)",
     grey: "hsl(0, 0%, 75%)",
+    grey_light: "#f0f0f0",
     grey_violet: "hsl(257, 7%, 63%)",
     dark_violet: "hsl(260, 8%, 14%)",
     dark_blue: "hsl(255, 11%, 22%)",

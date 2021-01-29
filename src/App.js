@@ -3,7 +3,7 @@ import { ThemeProvider } from "styled-components";
 import GlobalStyle from "./assets/styles/globalStyles";
 import theme from "./assets/styles/theme";
 
-import Layout from "./components/Layout";
+import Layout, { ColorBackground } from "./components/Layout";
 import Navbar from "./components/Navbar";
 import MobileMenu from "./components/MobileMenu";
 import HeroSection from "./components/HeroSection";
@@ -22,7 +22,9 @@ function App() {
 
         <HeroSection />
 
-        <SearchSection />
+        <ColorBackground>
+          <SearchSection />
+        </ColorBackground>
       </Layout>
     </ThemeProvider>
   );

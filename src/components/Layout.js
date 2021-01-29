@@ -16,4 +16,15 @@ const Container = styled.div`
   position: relative;
 `;
 
+export const ColorBackground = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+
+  background-color: ${(props) => props.theme.colors.grey_light};
+
+  margin-top: 13rem;
+`;
+
 export default Layout;
